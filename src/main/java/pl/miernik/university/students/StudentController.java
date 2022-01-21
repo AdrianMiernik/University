@@ -86,6 +86,13 @@ public class StudentController {
         return "redirect:/students/list";
     }
 
+    @PostMapping("/search")
+    public String searchStudentsPerTeacher(@RequestParam String input, ModelMap model){
+        List<Student> specifiedList = studentService.findAllStudentsForTeacher(input);
+        model.addAttribute("specifiedList", specifiedList);
+        return "/students/list";
+    }
+
     @ModelAttribute("students")
     private List<Student> students() {
         return studentService.studentList();
