@@ -2,6 +2,7 @@ package pl.miernik.university.students;
 
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -87,10 +88,10 @@ public class StudentController {
     }
 
     @PostMapping("/search")
-    public String searchStudentsPerTeacher(@RequestParam String input, ModelMap model){
-        List<Student> specifiedList = studentService.findAllStudentsForTeacher(input);
+    public String searchStudentsPerTeacher(@Param("input") String input, ModelMap model){
+        List<Student> specifiedList = studentService.findAllStudentsPerTeacher(input);
         model.addAttribute("specifiedList", specifiedList);
-        return "/students/list";
+        return "/students/filter";
     }
 
     @ModelAttribute("students")

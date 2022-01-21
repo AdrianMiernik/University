@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Students</title>
+
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+
+
+</head>
+<body>
+<div th:include="page::header"></div>
+<br>
+<br>
+
+<div class="container my-2">
+    <br>
+    <br>
+
+    <form th:action="@{/students/search}" th:method="post">
+        <input type="text" name="input" placeholder="Teacher name">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    <a th:href="@{/students/list}" class="btn btn-light col-2"> Back to Student List</a>
+
+    <div class="container my-5">
+
+        <table border="1" class="table table-striped table-responsive-md">
+            <thead>
+            <tr>
+                <th>First Name:</th>
+                <th>Last Name:</th>
+                <th>Age:</th>
+                <th>Email:</th>
+                <th>Field:</th>
+                <th>Teachers:</th>
+
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="spec : ${specifiedList}">
+                <td th:text="${spec.firstName}"></td>
+                <td th:text="${spec.lastName}"></td>
+                <td th:text="${spec.age}"></td>
+                <td th:text="${spec.email}"></td>
+                <td th:text="${spec.field}"></td>
+
+                <td>
+                    <p th:each="teacher: ${spec.teachers}">
+                        <span th:text="${teacher.firstName}"></span>
+                        <span th:text="${teacher.lastName}"></span>
+                    </p>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+</body>
+</html>

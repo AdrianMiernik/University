@@ -6,7 +6,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import pl.miernik.university.teachers.Teacher;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,5 +45,19 @@ public class StudentService implements IStudentService {
 
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
         return studentRepository.findAll(pageable);
+    }
+
+    @Override
+    public List<Student> findAllStudentsPerTeacher(String text) {
+        List<Student> outcomeList = new ArrayList<>();
+        List<Student> listOfStudents = studentRepository.findAll();
+        for (Student student : listOfStudents) {
+            for (Teacher teacher : student.getTeachers()) {
+                if (teacher.getFirstName().toLowerCase().contains(text.toLowerCase()) || teacher.getLastName().toLowerCase().contains(text.toLowerCase())) {
+                    outcomeList.add(student);
+                }
+            }
+        }
+        return outcomeList;
     }
 }
