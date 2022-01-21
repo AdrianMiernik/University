@@ -51,7 +51,7 @@
                 <a th:href="@{'/teachers/page/' + ${currentPage} + '?sortField=subject&sortDir=' + ${reverseSortDir}}">
                     Subject:</a>
             </th>
-            <th>Students:</th>
+         <!--   <th>Students:</th>-->
             <th>Action:</th>
         </tr>
         </thead>
@@ -63,12 +63,12 @@
             <td th:text="${teacher.email}"></td>
             <td th:text="${teacher.subject}"></td>
 
-            <td>
+           <!-- <td>
                 <p th:each="student: ${teacher.students}">
                     <span th:text="${student.firstName}"></span>
                     <span th:text="${student.lastName}"></span>
                 </p>
-            </td>
+            </td>-->
 
             <td>
                 <a th:href="@{/teachers/update/{id}(id=${teacher.id})}" class="btn btn-primary">Update</a>

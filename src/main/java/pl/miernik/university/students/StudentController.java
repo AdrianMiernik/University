@@ -22,7 +22,7 @@ public class StudentController {
                                               @RequestParam("sortField") String sortField,
                                               @RequestParam("sortDir") String sortDir,
                                               ModelMap model) {
-        int pageSize = 3;
+        int pageSize = 5;
         Page<Student> page = studentService.findPaginated(pageNo, pageSize, sortField, sortDir);
         List<Student> list = page.getContent();
         model.addAttribute("currentPage", pageNo);
@@ -58,7 +58,7 @@ public class StudentController {
         }
         studentService.saveStudent(student);
         model.addAttribute("students", students());
-        return "/students/list";
+        return "redirect:/students/list";
     }
 
     @GetMapping("/update/{id}")
@@ -76,9 +76,9 @@ public class StudentController {
         if (violation.hasErrors()) {
             return "/students/update";
         }
-        studentService.saveStudent(student);
-        model.addAttribute("students", students());
-        return "/students/list";
+            studentService.saveStudent(student);
+            model.addAttribute("students", students());
+            return "redirect:/students/list";
     }
 
     @GetMapping("/delete/{id}")

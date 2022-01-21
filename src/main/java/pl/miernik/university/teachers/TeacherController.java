@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import pl.miernik.university.students.Student;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -58,7 +57,7 @@ public class TeacherController {
         }
         teacherService.saveTeacher(teacher);
         model.addAttribute("teachers", teachers());
-        return "/teachers/list";
+        return "redirect:/teachers/list";
     }
 
     @GetMapping("/update/{id}")
@@ -77,7 +76,7 @@ public class TeacherController {
         }
         teacherService.saveTeacher(teacher);
         model.addAttribute("teachers", teachers());
-        return "/teachers/list";
+        return "redirect:/teachers/list";
     }
 
     @GetMapping("/delete/{id}")
