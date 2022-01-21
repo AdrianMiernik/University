@@ -12,4 +12,6 @@ public interface ITeacherService {
 
     List<Teacher> teacherList();
     Page<Teacher> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
+
+    List<Teacher> findAllTeachersPerStudent(String input);
 }

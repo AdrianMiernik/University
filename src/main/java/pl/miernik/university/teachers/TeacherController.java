@@ -2,10 +2,12 @@ package pl.miernik.university.teachers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import pl.miernik.university.students.Student;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -82,6 +84,13 @@ public class TeacherController {
     public String deleteTeacher(@PathVariable Integer id){
         teacherService.deleteTeacher(id);
         return "redirect:/teachers/list";
+    }
+
+    @PostMapping("/search")
+    public String searchStudentsPerTeacher(@Param("input") String input, ModelMap model){
+        List<Teacher> specifiedList = teacherService.findAllTeachersPerStudent(input);
+        model.addAttribute("specifiedList", specifiedList);
+        return "/teachers/filter";
     }
 
     @ModelAttribute("teachers")
