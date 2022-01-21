@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Update Student</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    
+</head>
+<body>
+<br>
+<br>
+
+<div class="container my-2">
+    <h1>Update Student:</h1>
+    <hr>
+
+    <form th:action="@{/teachers/update}" th:object="${teacher}" method="post">
+        <div>
+            <input type="hidden" th:field="*{id}"/>
+        </div>
+
+        <div class="errorClass">
+            <input type="text" th:field="*{firstName}" placeholder="First Name" class="form-control mb-4 col-4">
+            <div><span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Error name</span></div>
+        </div>
+
+        <div class="errorClass">
+            <input type="text" th:field="*{lastName}" placeholder="Last Name" class="form-control mb-4 col-4">
+            <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Error name</span>
+        </div>
+
+        <div class="errorClass">
+            <input type="number" th:field="*{age}" placeholder="Age" class="form-control mb-4 col-4">
+            <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Error name</span>
+        </div>
+
+        <div class="errorClass">
+            <input type="text" th:field="*{email}" placeholder="Email" class="form-control mb-4 col-4">
+            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error name</span>
+        </div>
+
+        <div class="errorClass">
+            <input type="text" th:field="*{subject}" placeholder="Subject" class="form-control mb-4 col-4">
+            <span th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}">Error name</span>
+        </div>
+
+        <hr>
+        <div>
+            <button type="submit" class="btn btn-info col-2"> Update</button>
+        </div>
+    </form>
+
+
+    <div class="rollover">
+        <a th:href="@{/teachers/list}" class="btn btn-light col-2"> Back to Teacher List</a>
+    </div>
+
+
+</div>
+</body>
+</html>
